@@ -1,0 +1,13 @@
+K1: [True, left_camera/intrinsic_matrix.csv]
+K2: [True, right_camera/intrinsic_matrix.csv]
+d1: [True, left_camera/distortion_coeffs.csv]
+d2: [True, right_camera/distortion_coeffs.csv]
+R: [False, " "]
+t: [False, " "]
+P1: [True, P1.csv]
+P2: [True, P2.csv]
+R1: [True, R1.csv]
+R2: [True, R2.csv]
+
+
+
