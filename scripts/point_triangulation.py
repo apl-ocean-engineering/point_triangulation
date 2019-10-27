@@ -69,7 +69,7 @@ def main():
     PI = PointIdentification3D(EI_loader)
     points4D = PI.get_points(copy.copy(img1), copy.copy(img2))
     points4D/=points4D[3]
-    print("4D points: ")
+    print("3D points: ")
     print(points4D[:3])
 
     cv2.destroyAllWindows()
