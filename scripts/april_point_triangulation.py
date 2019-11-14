@@ -4,11 +4,15 @@
 @author: Mitchell Scott
 @contact: miscott@uw.edu
 """
+
+# NOTE: currently not working. Getting an error regarding some of the parameters.
+
 import argparse
 import cv2
 import numpy as np
 import copy
 import glob
+import csv
 
 import sys
 from os.path import dirname, abspath
@@ -74,18 +78,25 @@ def main():
     left_filenames = sorted(glob.glob(left_path + "*.png"))
     right_filenames = sorted(glob.glob(right_path + "*.png"))
 
-    for left_fname, right_fname in zip(left_filenames, right_filenames):
-        img1 = cv2.imread(left_fname, cv2.IMREAD_GRAYSCALE)
-        img2 = cv2.imread(right_fname, cv2.IMREAD_GRAYSCALE)
-        print(left_fname)
-        print(right_fname)
-        points4D = PI.get_points(img1, img2)
-        points4D/=points4D[3]
-    print("3D points: ")
-    try:
-        print(points4D[:3])
-    except NameError:
-        print "No points created"
+    with open('serdp_output.csv', 'wb') as output_file:
+        wr = csv.writer(output_file, quoting=csv.QUOTE_MINIMAL)
+
+        for left_fname, right_fname in zip(left_filenames, right_filenames):
+            img1 = cv2.imread(left_fname, cv2.IMREAD_GRAYSCALE)
+            img2 = cv2.imread(right_fname, cv2.IMREAD_GRAYSCALE)
+            # print(left_fname)
+            # print(right_fname)
+            points4D = PI.get_points(img1, img2)
+            if points4D is None:
+                print("no points detected for " + left_fname + "and " + right_fname)
+            else:
+                points4D/=points4D[3]
+                wr.writerow(points4D[0:3])
+    # print("3D points: ")
+    # try:
+    #     print(points4D[:3])
+    # except NameError:
+    #     print "No points created"
 
     sys.exit()
 

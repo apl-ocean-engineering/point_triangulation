@@ -61,6 +61,9 @@ def main():
     img1 = cv2.imread(fname1)
     img2 = cv2.imread(fname2)
 
+    print("img name: ", fname1)
+    print("img name: ", fname2)
+
     loader = Loader(base_path=args.base_path)
     loader.load_params_from_file(args.calibration_yaml)
 
